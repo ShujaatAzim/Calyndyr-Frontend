@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from 'react'
+import DateView from './DateView'
 
 const DateViewContainer = props => {
 
   const { date } = props
 
-  const [clickedDate, setClickedDate] = useState(null)
-  const [activities, setActivities] = useState([])
+  const [days, setDays] = useState([])
 
-  // will use this to find the day object on the backend where the day.date === date object in props
-
-  // useEffect(() => {
-  //   fetch(`http://localhost:3000/days/${date.id}`)
-  //   .then(resp => resp.json())
-  //   .then(data => setClickedDate(data))
-  // }, [])
+  useEffect(() => {
+    fetch('http://localhost:3000/days')
+    .then(resp => resp.json())
+    .then(data => setDays(data))
+  }, [])
 
   return (
     <div>
-      {/* <DateView date={date} activities={activities} />  */}
+      <DateView date={date} days={days} /> 
     </div>
   )
 }
