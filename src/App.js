@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
-import Calendar from 'react-calendar'
-import DateViewContainer from './DateViewContainer'
-import 'react-calendar/dist/Calendar.css'
+import { format } from 'date-fns'
+import { enGB } from 'date-fns/locale'
+import { DatePickerCalendar } from 'react-nice-dates'
+import 'react-nice-dates/build/style.css'
 
 const App = () => {
 
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState()
 
   return (
-    <div>
-      <Calendar onChange={setDate} calendarType={"US"} date={date} />
-      <DateViewContainer date={date.toDateString()} />
+    <div style={{ padding: "33%" }}>
+      <p>
+        Selected date: {date ? format(date, 'dd MMM yyyy', { locale: enGB }) : 'none'}.
+      </p>
+        <DatePickerCalendar date={date} onDateChange={setDate} locale={enGB} />
     </div>
   )
 }
